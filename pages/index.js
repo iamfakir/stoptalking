@@ -6,29 +6,92 @@ const folders = [
     name: 'music',
     icon: '/folder-grey.png',
     style: { left: '15%', top: '35%' },
-    href: '/music',
+    href: 'music.html',
   },
   {
     name: 'store',
     icon: '/folder-black.png',
     style: { left: '55%', top: '12%' },
-    href: '/store',
+    href: 'store.html',
   },
   {
     name: 'nu thoughts',
     icon: '/folder-yellow.png',
     style: { left: '65%', top: '60%' },
-    href: '/nu-thoughts',
+    href: 'nu-thoughts.html',
   },
   {
     name: 'tour',
     icon: '/folder-grey.png',
     style: { left: '90%', top: '7%' },
-    href: '/tour',
+    href: 'tour.html',
   },
 ];
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+
+// Countdown Timer to next Friday 6pm
+function CountdownToNextFriday() {
+  const [timeLeft, setTimeLeft] = useState(getTimeToNextFriday());
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(getTimeToNextFriday());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+  if (!timeLeft) return null;
+  return (
+    <div style={{
+      color: '#fff',
+      background: 'rgba(24,0,20,0.7)',
+      border: '2px solid #ff2d55',
+      borderRadius: 12,
+      fontFamily: 'Poppins, Montserrat, monospace',
+      fontWeight: 700,
+      fontSize: 22,
+      marginBottom: 32,
+      padding: '12px 32px',
+      letterSpacing: 2,
+      boxShadow: '0 0 14px #ff2d55bb',
+      textShadow: '0 0 8px #ff2d55',
+      display: 'inline-block',
+      zIndex: 3
+    }}>
+      <span style={{ color: '#ff2d55', fontWeight: 900, marginRight: 16 }}>Next Update</span>
+      <span style={{ color: '#fff', fontWeight: 700 }}>
+        {`${timeLeft.dd} ${timeLeft.yy} ${timeLeft.mm} ${timeLeft.hr}HR ${timeLeft.min}m ${timeLeft.sec}s`}
+      </span>
+    </div>
+  );
+}
+
+function getTimeToNextFriday() {
+  const now = new Date();
+  let next = new Date(now);
+  next.setHours(18, 0, 0, 0); // 6pm
+  // 5 = Friday
+  let dayDiff = (5 - now.getDay() + 7) % 7;
+  if (dayDiff === 0 && now.getHours() >= 18) dayDiff = 7;
+  next.setDate(now.getDate() + dayDiff);
+  // Format: DD YY MM HR HR mm ss
+  const diff = next - now;
+  if (diff <= 0) return null;
+  const totalSec = Math.floor(diff / 1000);
+  const sec = totalSec % 60;
+  const min = Math.floor(totalSec / 60) % 60;
+  const hr = Math.floor(totalSec / 3600) % 24;
+  const dd = Math.floor(totalSec / 86400);
+  const yy = next.getFullYear();
+  const mm = String(next.getMonth() + 1).padStart(2, '0');
+  return {
+    dd: String(dd).padStart(2, '0'),
+    yy,
+    mm,
+    hr: String(hr).padStart(2, '0'),
+    min: String(min).padStart(2, '0'),
+    sec: String(sec).padStart(2, '0'),
+  };
+}
 
 export default function Home() {
   const vantaRef = useRef(null);
@@ -170,10 +233,12 @@ export default function Home() {
         <div style={{ color: '#ff2d55', fontSize: 22, fontWeight: 700, marginBottom: 38, textShadow: '0 0 12px #ff2d55bb' }}>
           After Hours Era Portal
         </div>
+        {/* Countdown Timer */}
+        <CountdownToNextFriday />
         {/* Folder Links */}
         <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 48 }}>
           {folders.map((folder) => (
-            <Link key={folder.name} href={folder.href} className="cyberpunk-btn">{folder.name}</Link>
+            <a key={folder.name} href={folder.href} className="cyberpunk-btn">{folder.name}</a>
           ))}
         </div>
         {/* Social Links Bottom */}
