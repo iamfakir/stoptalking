@@ -1,3 +1,4 @@
+
 # stop talking
 
 A minimalist website inspired by [oklama.com](https://oklama.com).
