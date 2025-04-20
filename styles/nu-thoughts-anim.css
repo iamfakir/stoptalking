@@ -1,0 +1,11 @@
+.nu-thoughts-anim-line {
+  opacity: 0;
+  transform: translateY(18px) skewX(-12deg) scale(0.98);
+  font-style: normal;
+  transition: opacity 0.5s, transform 0.5s, font-style 0.5s;
+}
+.nu-thoughts-anim-line.visible {
+  opacity: 1;
+  transform: translateY(0) skewX(0) scale(1);
+  font-style: italic;
+}
