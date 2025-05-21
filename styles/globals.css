@@ -1,12 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Turret+Road:wght@400;700;800&display=swap');
+
 html, body {
   padding: 0;
   margin: 0;
   background: #191919;
   color: #fff;
-  font-family: Arial Black, Arial, sans-serif;
+  font-family: 'Turret Road', sans-serif;
   letter-spacing: 0.05em;
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Vanta Container */
+#cyberpunk-vanta-bg {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at center, #100018 0%, #03000a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated Fog/Vignette Overlay */
+.vanta-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at 60% 40%, #00a8ff33 0%, #000 80%);
+  opacity: 0.6;
+  mix-blend-mode: screen;
+  filter: blur(16px);
+}
+
+/* Main Content Container */
+main {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main Heading */
+main h1 {
+  font-size: 52px;
+  color: #fff;
+  letter-spacing: 3px;
+  text-shadow: 0 0 18px #00a8ff, 0 0 32px #000;
+  margin-bottom: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Nu Thoughts Page Specific Styles */
+.nu-thoughts-container {
+  min-height: 100vh;
+  background: #03000a;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  /* font-family is inherited from body */
+}
+
+.nu-thoughts-top-bar {
+  display: flex;
+  align-items: center;
+  padding: 20px 0 0 32px;
+  font-size: 13px; /* Default for children, can be overridden */
+  color: #ccc;
+}
+
+.nu-thoughts-back-link {
+  color: #ccc;
+  text-decoration: none;
+  margin-right: 16px;
+  font-size: 18px;
+}
+
+.nu-thoughts-date {
+  letter-spacing: 0.07em;
+  font-size: 11px;
+}
+
+.nu-thoughts-poem {
+  max-width: 480px;
+  margin-left: 32px;
+  margin-top: 18px;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.nu-thoughts-image-container {
+  width: 240px;
+  margin: 48px 32px 0;
+  filter: grayscale(1);
+}
+
+/* Optional: If you want to style the Image component itself */
+.nu-thoughts-image-container img {
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Subtitle */
+.subtitle {
+  color: #00a8ff;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 38px;
+  text-shadow: 0 0 12px #ffcb6bbb;
+}
+
+/* Countdown Timer */
+.countdown-timer {
+  color: #fff;
+  background: rgba(24,0,20,0.7);
+  border: 2px solid #00a8ff;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 32px;
+  padding: 12px 32px;
+  letter-spacing: 2px;
+  box-shadow: 0 0 14px #00a8ffbb;
+  text-shadow: 0 0 8px #ffcb6bbb;
+  display: inline-block;
+  z-index: 3;
+}
+
+.countdown-timer .countdown-highlight {
+  color: #00a8ff;
+  font-weight: 900;
+  margin-right: 16px;
+}
+
+.countdown-timer .countdown-time {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Folder Links Container */
+.folder-links-container {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+/* Footer inside Main */
+.main-footer {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: #00a8ff;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  font-weight: 700;
+  text-shadow: 0 0 10px #ffcb6baa;
+  z-index: 10;
+}
+
+/* Bottom Social Links Footer */
+.bottom-social-links {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: #00a8ff;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  font-weight: 700;
+  text-shadow: 0 0 10px #ffcb6baa;
+  z-index: 10; /* Note: This z-index might conflict or be redundant with .main-footer */
+}
+
+.bottom-social-links a {
+  color: #00a8ff;
+  text-decoration: none;
+  transition: color 0.16s;
+}
+
+.bottom-social-links a:hover {
+  color: #ffcb6b; /* Example hover color */
+}
+
+/* Cyberpunk Button CSS */
+.cyberpunk-btn {
+  position: relative;
+  display: inline-block;
+  padding: 10px 32px 10px 32px;
+  margin: 0 8px 14px 8px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  background: #18181c;
+  border: 2.5px solid #00a8ff;
+  border-radius: 8px 18px 8px 18px / 18px 8px 18px 8px;
+  box-shadow: 0 0 10px #00a8ffcc, 0 0 2px #00a8ff88;
+  text-shadow: 0 0 4px #ffcb6bcc, 0 0 12px #ffcb6bbb;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.13s, filter 0.18s, box-shadow 0.18s, border-color 0.18s;
+  outline: none;
+  isolation: isolate;
+  animation: subtlePulse 2.5s infinite ease-in-out;
+}
+
+@keyframes subtlePulse {
+  0% {
+    box-shadow: 0 0 10px #00a8ffcc, 0 0 2px #00a8ff88, 0 0 12px #00a8ff33 inset;
+    text-shadow: 0 0 4px #ffcb6bcc, 0 0 12px #ffcb6bbb;
+  }
+  50% {
+    box-shadow: 0 0 16px #00a8ffee, 0 0 4px #00a8ffaa, 0 0 18px #00a8ff55 inset;
+    text-shadow: 0 0 6px #ffcb6bee, 0 0 16px #ffcb6bdd;
+  }
+  100% {
+    box-shadow: 0 0 10px #00a8ffcc, 0 0 2px #00a8ff88, 0 0 12px #00a8ff33 inset;
+    text-shadow: 0 0 4px #ffcb6bcc, 0 0 12px #ffcb6bbb;
+  }
+}
+
+.cyberpunk-btn:before {
+  content: '';
+  position: absolute;
+  left: -60%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(100deg,rgba(0, 168, 255, 0.19) 0%,rgba(0, 168, 255, 0.01) 100%);
+  transform: skewX(-24deg);
+  filter: blur(0.5px);
+  transition: left 0.45s cubic-bezier(.4,2,.6,1), opacity 0.28s;
+  opacity: 0.65;
+  z-index: 3;
+}
+.cyberpunk-btn:hover:before {
+  left: 120%;
+  opacity: 0.95;
+  transition: left 0.45s cubic-bezier(.4,2,.6,1), opacity 0.18s;
+}
+.cyberpunk-btn:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 2.5px;
+  background: linear-gradient(90deg,#00a8ff 0%,#ffcb6b 100%);
+  opacity: 0.65;
+  border-radius: 1.5px;
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity 0.2s;
+}
+.cyberpunk-btn:hover {
+  filter: brightness(1.22) drop-shadow(0 0 8px #00a8ff) drop-shadow(0 0 12px #00a8ff);
+  transform: scale(1.025);
+  border-color: #ffcb6b;
+  box-shadow: 0 0 32px #00a8ffbb, 0 0 18px #ffcb6bcc;
+}
+
+/* Music Page Specific Styles */
+.music-content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  padding: 32px 16px;
+}
+
+.spotify-player-container {
+  border-radius: 18px;
+  box-shadow: 0 2px 32px #00a8ff22, 0 0 16px #fff2;
+  background: rgba(24,24,32,0.65);
+  padding: 18px;
+  margin-bottom: 22px;
+  max-width: 380px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.music-blockquote {
+  color: #fff;
+  background: rgba(40,40,60,0.75);
+  border-left: 4px solid #ffcb6b; /* Updated accent color */
+  padding: 16px 22px;
+  border-radius: 10px;
+  margin: 0;
+  font-size: 18px;
+  font-style: italic;
+  box-shadow: 0 2px 12px #ffcb6b22; /* Updated accent color */
+  text-align: center;
+  max-width: 420px;
+}
+
+/* Tour Page Specific Styles */
+#tour-page-container {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  background: #03000a; /* Updated background color */
+}
+
+.tour-bg-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: url('/tour-bg.png') center center / cover no-repeat fixed;
+  opacity: 0.18;
+  filter: brightness(0.7) grayscale(1); /* This filter might need adjustment based on the new bg */
+}
+
+.tour-content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-shadow: 0 2px 10px #000;
+}
+
+.tour-content h1 {
+  /* Font family will be inherited from body */
+  font-weight: bold; /* Kept from inline */
+  font-size: 32px; /* Kept from inline */
+  margin-bottom: 24px; /* Kept from inline */
+  /* text-shadow is already on .tour-content, can be overridden here if needed */
+}
+
+/* Store Page Specific Styles */
+.store-page-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #03000a;
+  color: #fff;
+}
+
+.store-page-container h1 {
+  /* Ensure heading styles are consistent if not already covered by main h1 */
+  font-size: 52px; /* Example, adjust as needed */
+  color: #fff;
+  letter-spacing: 3px;
+  text-shadow: 0 0 18px #00a8ff, 0 0 32px #000;
+  margin-bottom: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
