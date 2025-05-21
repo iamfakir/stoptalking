@@ -1,6 +1,6 @@
 export default function Store() {
   return (
-    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#191919' }}>
+    <main className="store-page-container">
       <h1>Store Page</h1>
     </main>
   );
